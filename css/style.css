@@ -260,6 +260,7 @@ h1.heading{
     line-height: 32px;
     text-align: center;
     margin-left: auto;
+    cursor: pointer;
 }
 .course-item .price{
     background: var(--primary);
@@ -329,6 +330,7 @@ h1.heading{
 }
 .footer-logo .bottom-logo{
     display: flex;
+    align-items: center;
 }
 .bottom-logo li{
     min-width: 110px;
