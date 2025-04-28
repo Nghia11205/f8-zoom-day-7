@@ -54,7 +54,48 @@ a{
     display: flex;
     padding: 0 15px;
 }
-.nav a {
+.nav li{
+    position: relative;
+}
+.nav-item1{
+    position: absolute;
+    background: #fff;
+    top:100%;
+    left: 0;
+    opacity: 0;
+    transform: scale(1,0);
+    transition: all 0.5s ease-in-out;
+    transform-origin: 100% 0;
+}
+.nav-item .nav-item1 li{
+    width: 220px;
+    height: 46px;
+}
+.nav-item .nav-item1 li a{
+    width: 100%;
+    display: flex;
+    height: 100%;
+    padding:0 25px;
+    line-height: 46px;
+    color:#0009;
+    font-size: 1.6rem;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: color 0.3s ease,translate 0.3s ease;
+    translate:0;
+}
+.nav li:hover .nav-item1{
+    opacity: 1;
+    transform: scale(1);
+}
+.nav .nav-item1 li:hover{
+    background: var(--primary);
+}
+.nav-item .nav-item1 li a:hover{
+   color:#fff;
+   translate:6px;
+}
+.nav  .nav-item > a {
     display: inline-block;
     color:#fff;
     text-transform:uppercase;
@@ -65,15 +106,53 @@ a{
     letter-spacing: 1.1px;
     font-weight: 700;
 }
+.nav-item li + li{
+    border-top: 1px solid #ccc9;
+}
 .user-action{
     display: flex;
     gap: 20px;
 }
-.btn{
+.user-action .btn{
+    width: 54px;
+    height: 33px;
     font-size: 2rem;
     color:var(--white);
     cursor: pointer;
+    position: relative;
 }
+.user-action .form-btn{
+    position: absolute;
+    display: flex;
+    right: 0;
+    top:100%;
+    background: #fff;
+    min-width: 280px;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+.user-action .form-btn input{
+    width: 210px;
+    height: 47px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    padding-right: 50px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 20px;
+}
+.user-action .search{
+    background: var(--primary);
+    color: #fff;;
+    width: 48px;
+    height: 47px;
+    line-height: 47px;
+}
+.user-action .btn:focus .form-btn{
+    visibility:visible;
+} 
 .inner{
     display: flex;
 }
@@ -162,8 +241,11 @@ h1.heading{
     padding: 0 25px;
     text-decoration: none;
     color: #000000b3;
+    translate: 0;
+    transition: color 0.3s ease, translate 0.3s ease;
 }
 .menu a:hover{
+    translate: 6px;
     color:var(--secondary);
 }
 
@@ -179,17 +261,30 @@ h1.heading{
     justify-content: center;
     gap:18px;
 }
+.topics li{
+    background: #fff;
+    transition: background 0.5s ease;
+    border-radius: 15px;
+}
+.topics li:hover{
+    background: var(--secondary);
+}
 .topics a{
     display: inline-block;
     text-decoration: none;
     padding:0 14px;
-    border-radius: 15px;
     height: 30px;
     line-height: 30px;
+    color:#0009;
+    transition: color 0.3s ease-out;
 }
-.topics .active a, .topics a:hover{
-   background: var(--secondary);
+.topics a:hover{
    color: #fff;
+}
+.topics .active a{
+    background: var(--secondary);
+    border-radius: 15px;
+    color: #fff;
 }
 /* Course list */
 .course-list{
@@ -207,15 +302,20 @@ h1.heading{
     border: 1px solid #0000000d;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 .comments-item .thump-wrapper{
    display: block;
    aspect-ratio: 1 / 0.8;
+   position: relative;
 }
 .thump-wrapper img{
-    object-fit: cover;
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: all 0.6s ease-in-out;
 }
 .infor{
     flex:1;
@@ -223,11 +323,13 @@ h1.heading{
     flex-direction: column;
     padding: 15px 20px;
 }
-.course-item .title a{
+.course-item .title{
     font-size: 1.8rem;
     text-decoration: none;
     color: #464646;
     line-height:1.3;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 .course-item .text{
     margin: 20px 0;
@@ -262,9 +364,45 @@ h1.heading{
     text-align: center;
     margin-left: auto;
     cursor: pointer;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+}
+.course-item .course-btn:hover{
+    transform: translateY(-6px);
+    box-shadow: 2px 27px 9px -10px rgba(0,0,0,1);
+-webkit-box-shadow: 2px 27px 9px -10px rgba(0,0,0,1);
+-moz-box-shadow: 2px 27px 9px -10px rgba(0,0,0,1);
 }
 .course-item .price{
     background: var(--primary);
+}
+.course-item:hover .title{
+    color: var(--primary);
+}
+.course-item:hover .thump-wrapper img{
+    transform: scale3d(1.1, 1.1, 1);
+    opacity: 0.8;
+}
+.course-item .img::before{
+    content: "\e0b7";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 600;
+    text-align: center;
+    font-size: 2rem;
+    background-color: var(--primary);
+    color: var(--white);
+    width: 140px;
+    height: 70px;
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    top: -36px;
+    right: -60px;
+    z-index: 10;
+    transform: rotate(35deg);
+    padding-bottom: 3px;
 }
 
 /* Pagination */
@@ -290,6 +428,7 @@ h1.heading{
     height: 29px;
     line-height: 29px;
     text-align: center;
+    transition: all 0.3s ease-in-out;
 }
 .course-pagination li:first-child .item, .course-pagination .item:hover:not(.active a){
     border: 1px solid var(--secondary);
@@ -356,6 +495,7 @@ h1.heading{
     text-decoration: none;
     display: block;
     line-height: 30px;
+    transition: color 0.3s ease-in;
 }
 .footer-subscribe p{
     margin-top: 25px;
@@ -380,13 +520,31 @@ h1.heading{
     width: 95px;
     line-height: 40px;
     border-radius: 20px;
+    position: relative;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-}
-.footer-btn:hover{
-    background: #fff;
-    color: var(--primary);
     cursor: pointer;
+}
+.footer-btn::before{
+    content: "SEND";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    background: var(--white);
+    color: var(--primary);
+    border-radius: 2rem;
+    transform: scale(0);
+    transition-property: transform;
+    transition-duration: 0.5s;
+}
+.footer-btn:hover::before{
+    z-index: 1;
+    transform: scale(1);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 .footer-list a:hover{
     cursor: pointer;
